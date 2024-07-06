@@ -41,5 +41,15 @@ app.get("/protected", (req, res) => {
   }
 });
 
+app.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      res.status(500).send("Error logging out");
+    } else {
+      res.redirect("/");
+    }
+  });
+});
+
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
